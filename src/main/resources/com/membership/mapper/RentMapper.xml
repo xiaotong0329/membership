@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.membership.mapper.RentMapper">
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into rent_info(id, rent_id, rent_name, description, create_time, update_time, deleted)
+        values
+        (#{id}, #{rentId}, #{rentName}, #{description}, #{createTime}, #{updateTime}, #{deleted})
+    </insert>
+</mapper>
