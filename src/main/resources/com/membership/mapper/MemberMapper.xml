@@ -10,4 +10,7 @@
         (#{userId}, #{rentId}, #{memberNo}, #{userName}, #{password},
         #{phone}, #{imageUrl}, #{currentLevel}, #{totalPoints}, #{createTime}, #{updateTime}, #{deleted})
     </insert>
+    <select id="login" resultType="com.membership.pojo.MemberInfo">
+        select * from member_info where user_id = #{userId} and password = #{password} and rent_id = #{rentId}
+    </select>
 </mapper>

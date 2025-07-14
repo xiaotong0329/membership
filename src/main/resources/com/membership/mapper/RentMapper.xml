@@ -8,4 +8,6 @@
         values
         (#{id}, #{rentId}, #{rentName}, #{description}, #{createTime}, #{updateTime}, #{deleted})
     </insert>
+
+
 </mapper>

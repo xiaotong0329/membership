@@ -31,4 +31,11 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @Override
+    public MemberInfo login(MemberInfo memberInfo) {
+        log.info("service login memberInfo: {}", memberInfo);
+        MemberInfo m =  memberMapper.login(memberInfo);
+        return m;
+    }
+
 }

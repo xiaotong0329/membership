@@ -6,4 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberMapper {
     void register(MemberInfo memberInfo);
+
+    MemberInfo login (MemberInfo memberInfo);
 }
