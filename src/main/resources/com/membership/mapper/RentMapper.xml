@@ -9,5 +9,11 @@
         (#{id}, #{rentId}, #{rentName}, #{description}, #{createTime}, #{updateTime}, #{deleted})
     </insert>
 
+    <insert id="addLevelRule" useGeneratedKeys="true" keyProperty="id">
+        insert into level_rule(id, rent_id, level, min_points)
+        values
+        (#{id}, #{rentId}, #{level}, #{minPoints})
+    </insert>
+
 
 </mapper>

@@ -1,5 +1,6 @@
 package com.membership.controller;
 
+import com.membership.pojo.LevelRule;
 import com.membership.pojo.RentInfo;
 import com.membership.pojo.Result;
 import com.membership.service.RentService;
@@ -23,6 +24,16 @@ public class RentController {
         rentService.add(rentInfo);
         return Result.success(rentInfo);
     }
+
+    @PostMapping("/add-level-rule")
+    public Result addLevelRule(@RequestBody LevelRule levelRule) {
+        log.info("add level rule :{}", levelRule);
+        rentService.addLevelRule(levelRule);
+        return Result.success();
+
+    }
+
+
 
 
 }

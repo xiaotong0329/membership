@@ -13,4 +13,29 @@
     <select id="login" resultType="com.membership.pojo.MemberInfo">
         select * from member_info where user_id = #{userId} and password = #{password} and rent_id = #{rentId}
     </select>
+    <update id="addPoints" >
+        update member_info
+        <set>
+            total_points = total_points + #{points}
+        </set>
+        <where>
+            user_id = #{userId}
+            and rent_id = #{rentId}
+        </where>
+    </update>
+
+    <select id="getMinPoints" resultType="int">
+        select min_points from level_rule where level = #{level} and rent_id = #{rentId}
+    </select>
+
+    <update id="addLevel">
+        update member_info set current_level = current_level + 1
+        where user_id = #{userId} and rent_id = #{rentId}
+    </update>
+    <select id="getMemberInfo" resultType="com.membership.pojo.MemberInfo">
+        select * from member_info
+        <where>
+            user_id = #{userId} and rent_id = #{rentId}
+        </where>
+    </select>
 </mapper>

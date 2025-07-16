@@ -1,5 +1,6 @@
 package com.membership.controller;
 
+import com.membership.aop.annotation.AwardPoints;
 import com.membership.pojo.MemberInfo;
 import com.membership.pojo.Result;
 import com.membership.service.MemberService;
@@ -29,6 +30,7 @@ public class MemberController {
         return Result.success();
     }
 
+    @AwardPoints(eventType = "login")
     @PostMapping("/v1/login")
     public Result login(@RequestBody MemberInfo memberInfo){
         log.info("login:{}", memberInfo);
@@ -36,11 +38,20 @@ public class MemberController {
 
         if (mem != null) {
             Map<String, Object> claims = new HashMap<>();
-            claims.put("userid", mem.getUserId());
+            claims.put("userId", mem.getUserId());
+            claims.put("rentId", mem.getRentId());
+            log.info("login:{}", mem);
 
             String jwt = JWTUtils.createJWT(claims);
             return Result.success(jwt);
         }
+        return Result.success();
+    }
+
+    @AwardPoints(eventType = "purchase")
+    @PostMapping("/v1/purchase")
+    public Result purchase(){
+        log.info("purchase");
         return Result.success();
     }
 

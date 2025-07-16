@@ -1,7 +1,9 @@
-package com.membership.service;
+package com.membership.service.impl;
 
 import com.membership.mapper.RentMapper;
+import com.membership.pojo.LevelRule;
 import com.membership.pojo.RentInfo;
+import com.membership.service.RentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +26,11 @@ public class RentServiceImpl implements RentService {
         rentInfo.setDeleted(0);
         rentMapper.add(rentInfo);
 
+    }
+
+    @Override
+    public void addLevelRule(LevelRule levelRule) {
+        log.info("service add level rule");
+        rentMapper.addLevelRule(levelRule);
     }
 }
