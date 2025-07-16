@@ -38,4 +38,10 @@
             user_id = #{userId} and rent_id = #{rentId}
         </where>
     </select>
+
+    <insert id="addLog" useGeneratedKeys="true" keyProperty="id">
+        insert into operation_log ( operation_type, operation_time, before_operation, after_operation, point_change, user_id, rent_id)
+        values
+        ( #{operationType}, #{operationTime}, #{beforeOperation}, #{afterOperation}, #{pointChange}, #{userId}, #{rentId})
+    </insert>
 </mapper>

@@ -1,6 +1,7 @@
 package com.membership.controller;
 
 import com.membership.aop.annotation.AwardPoints;
+import com.membership.aop.annotation.Log;
 import com.membership.pojo.MemberInfo;
 import com.membership.pojo.Result;
 import com.membership.service.MemberService;
@@ -30,6 +31,7 @@ public class MemberController {
         return Result.success();
     }
 
+    @Log(eventType = "login")
     @AwardPoints(eventType = "login")
     @PostMapping("/v1/login")
     public Result login(@RequestBody MemberInfo memberInfo){
@@ -48,6 +50,7 @@ public class MemberController {
         return Result.success();
     }
 
+    @Log(eventType = "purchase")
     @AwardPoints(eventType = "purchase")
     @PostMapping("/v1/purchase")
     public Result purchase(){
