@@ -10,7 +10,7 @@ public interface MemberMapper {
 
     MemberInfo login (MemberInfo memberInfo);
 
-    void addPoints(String userId, String rentId, Integer points);
+    Integer addPoints(String userId, String rentId, Integer points);
 
     Integer getMinPoints(Integer level, String rentId);
 
@@ -19,4 +19,6 @@ public interface MemberMapper {
     MemberInfo getMemberInfo(String userId, String rentId);
 
     void addLog(OperationLog log);
+
+    Integer updateInfo(MemberInfo memberInfo);
 }

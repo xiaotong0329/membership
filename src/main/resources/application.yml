@@ -1,12 +1,11 @@
 spring:
   application:
-    name:membership
+    name: membership
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/mem01
     username: root
     password: Gothham040329
-
   jpa:
     hibernate:
       ddl-auto: update

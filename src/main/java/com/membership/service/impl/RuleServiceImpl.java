@@ -8,14 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RuleServiceImpl implements RuleService {
-
     @Autowired
     private RuleMapper ruleMapper;
 
     @Override
     public PointRule getRule(String eventType, String rentId) {
-        PointRule p = ruleMapper.getRule(eventType, rentId);
-        return p;
-
+        return ruleMapper.getRule(eventType, rentId);
     }
 }

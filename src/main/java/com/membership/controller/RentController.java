@@ -18,6 +18,10 @@ public class RentController {
     @Autowired
     private RentService rentService;
 
+    /**
+     * @param rentInfo 增加商铺
+     * @return
+     */
     @PostMapping("/add")
     public Result add(@RequestBody RentInfo rentInfo) {
         log.info("add rent info :{}", rentInfo);
@@ -25,6 +29,10 @@ public class RentController {
         return Result.success(rentInfo);
     }
 
+    /**
+     * @param levelRule 增加等级规则
+     * @return
+     */
     @PostMapping("/add-level-rule")
     public Result addLevelRule(@RequestBody LevelRule levelRule) {
         log.info("add level rule :{}", levelRule);
@@ -32,8 +40,6 @@ public class RentController {
         return Result.success();
 
     }
-
-
 
 
 }

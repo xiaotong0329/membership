@@ -23,7 +23,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         log.info("请求的url：{}", url);
 
         //2. have login ?
-        if(url.contains("/login")) {
+        if (url.contains("/login")) {
             log.info("登录操作，放行");
             return true;
         }
@@ -32,7 +32,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         String jwt = request.getHeader("token");
 
         //4. token exist?
-        if(!StringUtils.hasLength(jwt)) {
+        if (!StringUtils.hasLength(jwt)) {
             log.info("请求头token为空，返回未登录的信息");
             Result error = Result.error("NOT_LOGIN");
             String notLogin = JSONObject.toJSONString(error);
@@ -41,9 +41,9 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         }
 
         //5. analyze token
-        try{
+        try {
             JWTUtils.parseJWT(jwt);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             log.info("解析令牌失败，返回错误信息");
             Result error = Result.error("NOT_LOGIN");

@@ -44,4 +44,18 @@
         values
         ( #{operationType}, #{operationTime}, #{beforeOperation}, #{afterOperation}, #{pointChange}, #{userId}, #{rentId})
     </insert>
+
+    <update id="updateInfo">
+        update member_info
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username}
+            </if>
+            <if test="imageUrl != null and imageUrl != ''">
+                image_url = #{imageUrl}
+            </if>
+
+        </set>
+        where user_id = #{userId} and rent_id = #{rentId}
+    </update>
 </mapper>

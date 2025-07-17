@@ -22,7 +22,6 @@ public class JWTUtils {
                 .setExpiration(Date.from(Instant.now().plusSeconds(expire)))
                 .compact();
         return jwt;
-
     }
 
     public static Claims parseJWT(String jwt) {
@@ -30,9 +29,5 @@ public class JWTUtils {
                 .setSigningKey(signingKey)
                 .parseClaimsJws(jwt).getBody();
         return claims;
-
     }
-
-
-
 }

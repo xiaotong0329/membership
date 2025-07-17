@@ -1,6 +1,7 @@
 package com.membership.service.impl;
 
 
+import com.membership.exception.OperationFailedException;
 import com.membership.mapper.MemberMapper;
 import com.membership.pojo.MemberInfo;
 import com.membership.service.MemberService;
@@ -35,14 +36,17 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberInfo login(MemberInfo memberInfo) {
         log.info("service login memberInfo: {}", memberInfo);
-        MemberInfo m =  memberMapper.login(memberInfo);
+        MemberInfo m = memberMapper.login(memberInfo);
         return m;
     }
 
     @Override
-    public void addPoints(String userId, String rentId, Integer points) {
+    public void addPoints(String userId, String rentId, Integer points) throws OperationFailedException {
         log.info("service addPoint userId: {}, rentId: {}", userId, rentId);
-        memberMapper.addPoints(userId, rentId, points);
+        int affectedrows = memberMapper.addPoints(userId, rentId, points);
+        if (affectedrows == 0) {
+            throw new OperationFailedException("文件上传失败");
+        }
     }
 
     @Override
@@ -61,6 +65,15 @@ public class MemberServiceImpl implements MemberService {
     public MemberInfo getMemberInfo(String userId, String rentId) {
         log.info("service getMemberInfo userId: {}, rentId: {}", userId, rentId);
         return memberMapper.getMemberInfo(userId, rentId);
+    }
+
+    @Override
+    public void updateInfo(MemberInfo memberInfo) throws OperationFailedException {
+        log.info("service updateInfo memberInfo: {}", memberInfo);
+        int affectedrows = memberMapper.updateInfo(memberInfo);
+        if (affectedrows == 0) {
+            throw new OperationFailedException("信息修改失败");
+        }
     }
 
 }
