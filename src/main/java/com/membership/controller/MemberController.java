@@ -7,6 +7,8 @@ import com.membership.pojo.Result;
 import com.membership.service.MemberService;
 import com.membership.utils.AliOSSUtils;
 import com.membership.utils.JWTUtils;
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,9 @@ public class MemberController {
 
     @Autowired
     AliOSSUtils aliOSSUtils;
+
+    @Autowired
+    HttpServletRequest request;
 
     /**
      * @param memberInfo 注册会员信息
@@ -74,22 +79,36 @@ public class MemberController {
     }
 
     /**
-     * @param memberInfo 传入userid, rentid, 修改username
-     * @param imageFile  传入头像
+     * @param
+     * @param image  传入头像
      * @return
      * @throws IOException
      */
-    @PostMapping("/v1/update-info")
-    public Result updateInfo(
-            @RequestPart("memberInfo") MemberInfo memberInfo,
-            @RequestPart(value = "image", required = false) MultipartFile imageFile) throws IOException {
-        log.info("updateInfo:{}", memberInfo);
-        if (imageFile != null && !imageFile.isEmpty()) {
-            String imageUrl = aliOSSUtils.upload(imageFile);
-            memberInfo.setImageUrl(imageUrl);
+    @PostMapping(value = "/v1/update-image", consumes = "multipart/form-data")
+    public Result updateImage(
+            MultipartFile image) throws IOException {
+        log.info("updateInfo:{}" , image);
+        if (image != null && !image.isEmpty()) {
+            String imageUrl = aliOSSUtils.upload(image);
+            String jwt = request.getHeader("token");
+            Claims claims = JWTUtils.parseJWT(jwt);
+            String userId = (String) claims.get("userId");
+            String rentId = (String) claims.get("rentId");
+            memberService.updateImage(imageUrl, userId, rentId);
+            return Result.success();
         }
+
+        return Result.error("未上传文件");
+    }
+
+    @PostMapping("/v1/update-info")
+    public Result updateInfo(@RequestBody MemberInfo memberInfo) {
+        log.info("updateInfo:{}", memberInfo);
         memberService.updateInfo(memberInfo);
         return Result.success();
+
     }
+
+
 
 }

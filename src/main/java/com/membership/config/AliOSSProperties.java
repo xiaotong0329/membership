@@ -1,4 +1,4 @@
-package com.membership.utils;
+package com.membership.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

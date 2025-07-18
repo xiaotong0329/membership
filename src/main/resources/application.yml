@@ -10,10 +10,24 @@ spring:
     hibernate:
       ddl-auto: update
 
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
+
+aliyun:
+  oss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tBc3jnxh5z4AWD3TSzc
+    access-key-secret: o1pnXqmkwiMnYX3Tp2EETCeOIodOa3
+    bucket-name: tsurumi
+
 
 logging:
   level:

@@ -68,11 +68,20 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void updateInfo(MemberInfo memberInfo) throws OperationFailedException {
+    public void updateImage(String imageUrl, String userId, String rentId) throws OperationFailedException {
+        log.info("service updateInfo memberInfo: {}", imageUrl);
+        int affectedrows = memberMapper.updateImage(imageUrl, userId, rentId);
+        if (affectedrows == 0) {
+            throw new OperationFailedException("头像信息修改失败");
+        }
+    }
+
+    @Override
+    public void updateInfo(MemberInfo memberInfo) {
         log.info("service updateInfo memberInfo: {}", memberInfo);
         int affectedrows = memberMapper.updateInfo(memberInfo);
         if (affectedrows == 0) {
-            throw new OperationFailedException("信息修改失败");
+            throw new OperationFailedException("会员信息修改失败");
         }
     }
 

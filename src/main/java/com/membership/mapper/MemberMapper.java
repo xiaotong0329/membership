@@ -20,5 +20,7 @@ public interface MemberMapper {
 
     void addLog(OperationLog log);
 
+    Integer updateImage(String imageUrl, String userId, String rentId);
+
     Integer updateInfo(MemberInfo memberInfo);
 }

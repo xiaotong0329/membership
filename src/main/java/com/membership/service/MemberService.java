@@ -17,6 +17,8 @@ public interface MemberService {
 
     void addLevel(String userId, String rentId);
 
+    void updateImage(String image, String userId, String rentId);
+
     void updateInfo(MemberInfo memberInfo);
 }
 
